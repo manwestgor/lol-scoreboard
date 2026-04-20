@@ -1,37 +1,40 @@
 {
-  "updated_at": "2026-01-01T00:00:00+00:00",
+  "updated_at": "2026-04-20T12:04:53.888043+00:00",
   "players": [
     {
       "name": "マチュ",
       "tag": "KR2",
       "url": "https://lol.ps/summoner/%E3%83%9E%E3%83%81%E3%83%A5%20_KR2?region=kr",
-      "tier": "Master",
+      "tier": "Error",
       "lp": 0,
       "wins": 0,
       "losses": 0,
       "winrate": 0.0,
+      "error": "HTTP Error 404: Not Found",
       "rank": 1
     },
     {
       "name": "Squirt1e",
       "tag": "2004",
       "url": "https://lol.ps/summoner/Squirt1e%20_2004?region=kr",
-      "tier": "Master",
+      "tier": "Error",
       "lp": 0,
       "wins": 0,
       "losses": 0,
       "winrate": 0.0,
+      "error": "HTTP Error 404: Not Found",
       "rank": 2
     },
     {
       "name": "leave me alone",
       "tag": "2005",
       "url": "https://lol.ps/summoner/leave%20me%20alone%20_2005?region=kr",
-      "tier": "Master",
+      "tier": "Error",
       "lp": 0,
       "wins": 0,
       "losses": 0,
       "winrate": 0.0,
+      "error": "HTTP Error 404: Not Found",
       "rank": 3
     }
   ]
