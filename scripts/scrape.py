@@ -95,19 +95,29 @@ def parse_with_gemini(image_bytes: bytes, player_name: str) -> dict:
     }
 
     data = json.dumps(body).encode("utf-8")
-    req = urllib.request.Request(
-        GEMINI_URL,
-        data=data,
-        headers={"Content-Type": "application/json"},
-        method="POST",
-    )
-
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        result = json.loads(resp.read())
+    
+    # Retry up to 3 times on 429
+    for attempt in range(3):
+        try:
+            req = urllib.request.Request(
+                GEMINI_URL,
+                data=data,
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                result = json.loads(resp.read())
+            break
+        except Exception as e:
+            if "429" in str(e) and attempt < 2:
+                wait = 30 * (attempt + 1)
+                print(f"  429 rate limit, waiting {wait}s before retry...")
+                time.sleep(wait)
+            else:
+                raise
 
     text = result["candidates"][0]["content"]["parts"][0]["text"].strip()
 
-    # Strip markdown fences if present
     if text.startswith("```"):
         text = text.split("```")[1]
         if text.startswith("json"):
