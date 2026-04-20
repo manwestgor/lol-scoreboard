@@ -126,7 +126,71 @@ def main():
             img = screenshot_page(player["url"])
             print(f"  Screenshot captured ({len(img)} bytes)")
 
-            rank = parse_with_gemini(img, player["name"])
+def parse_with_gemini(image_bytes: bytes, player_name: str) -> dict:
+    """Send screenshot to Gemini Vision and extract rank data."""
+    image_b64 = base64.b64encode(image_bytes).decode()
+
+    prompt = (
+        f"This is a screenshot of a League of Legends profile page for player '{player_name}' on lol.ps.\n"
+        "Extract the ranked solo/duo information and return ONLY valid JSON (no markdown, no explanation).\n"
+        "Format:\n"
+        '{"tier": "Master", "lp": 180, "wins": 47, "losses": 36}\n'
+        "Rules:\n"
+        "- tier: the rank tier string (e.g. Iron, Bronze, Silver, Gold, Platinum, Emerald, Diamond, Master, Grandmaster, Challenger)\n"
+        "- lp: integer LP value (League Points)\n"
+        "- wins: integer number of wins\n"
+        "- losses: integer number of losses\n"
+        "- If you cannot find ranked data, return: {\"tier\": \"Unranked\", \"lp\": 0, \"wins\": 0, \"losses\": 0}\n"
+        "Return ONLY the JSON object, nothing else."
+    )
+
+    body = {
+        "contents": [
+            {
+                "parts": [
+                    {"text": prompt},
+                    {
+                        "inline_data": {
+                            "mime_type": "image/png",
+                            "data": image_b64,
+                        }
+                    },
+                ]
+            }
+        ]
+    }
+
+    data = json.dumps(body).encode("utf-8")
+    
+    # Retry up to 3 times on 429
+    for attempt in range(3):
+        try:
+            req = urllib.request.Request(
+                GEMINI_URL,
+                data=data,
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                result = json.loads(resp.read())
+            break
+        except Exception as e:
+            if "429" in str(e) and attempt < 2:
+                wait = 30 * (attempt + 1)
+                print(f"  429 rate limit, waiting {wait}s before retry...")
+                time.sleep(wait)
+            else:
+                raise
+
+    text = result["candidates"][0]["content"]["parts"][0]["text"].strip()
+
+    if text.startswith("```"):
+        text = text.split("```")[1]
+        if text.startswith("json"):
+            text = text[4:]
+        text = text.strip()
+
+    return json.loads(text)
             print(f"  Parsed: {rank}")
 
             wins = rank.get("wins", 0)
@@ -159,7 +223,7 @@ def main():
                 "error": str(e),
             })
 
-        time.sleep(2)  # polite delay between requests
+        time.sleep(15)  # polite delay between requests
 
     # Sort by LP descending (Unranked/Error go last)
     TIER_ORDER = {
