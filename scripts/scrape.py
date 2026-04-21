@@ -34,7 +34,9 @@ def screenshot_page(url: str) -> bytes:
             page.goto(url, timeout=45000)
             page.wait_for_timeout(8000)
         page.wait_for_timeout(3000)
-        screenshot = page.screenshot(full_page=False)
+        page.evaluate("window.scrollBy(0, 400)")
+        page.wait_for_timeout(1000)
+        screenshot = page.screenshot(full_page=True)
         browser.close()
         return screenshot
 
