@@ -64,22 +64,22 @@ def parse_with_gemini(image_bytes: bytes, player_name: str) -> dict:
     """Send screenshot to Gemini Vision and extract rank data."""
     image_b64 = base64.b64encode(image_bytes).decode()
 
-prompt = (
-    f"This is a screenshot of a League of Legends profile page for player '{player_name}' on lol.ps.\n"
-    "Find the ranked solo/duo queue statistics on this page.\n"
-    "The wins and losses may appear in formats like: '47W 36L', '47Win 36Loss', '47승 36패', '47勝 36敗', or just numbers near a W/L label.\n"
-    "Return ONLY a valid JSON object with no markdown, no explanation:\n"
-    '{"tier": "Master", "lp": 180, "wins": 47, "losses": 36}\n'
-    "Rules:\n"
-    "- tier: rank tier (Iron/Bronze/Silver/Gold/Platinum/Emerald/Diamond/Master/Grandmaster/Challenger)\n"
-    "- lp: integer LP number\n"
-    "- wins: integer win count (look for W, Win, 승, 勝)\n"
-    "- losses: integer loss count (look for L, Loss, 패, 敗)\n"
-    "- If data not found: {\"tier\": \"Unranked\", \"lp\": 0, \"wins\": 0, \"losses\": 0}\n"
-    "Return ONLY the JSON object."
-)
+    prompt = (
+        f"This is a screenshot of a League of Legends profile page for player '{player_name}' on lol.ps.\n"
+        "Find the ranked solo/duo queue statistics on this page.\n"
+        "The wins and losses may appear in formats like: '47W 36L', '47Win 36Loss', '47승 36패', '47勝 36敗', or just numbers near a W/L label.\n"
+        "Return ONLY a valid JSON object with no markdown, no explanation:\n"
+        '{\"tier\": \"Master\", \"lp\": 180, \"wins\": 47, \"losses\": 36}\n'
+        "Rules:\n"
+        "- tier: rank tier (Iron/Bronze/Silver/Gold/Platinum/Emerald/Diamond/Master/Grandmaster/Challenger)\n"
+        "- lp: integer LP number\n"
+        "- wins: integer win count (look for W, Win)\n"
+        "- losses: integer loss count (look for L, Loss)\n"
+        "- If data not found: {\"tier\": \"Unranked\", \"lp\": 0, \"wins\": 0, \"losses\": 0}\n"
+        "Return ONLY the JSON object."
+    )
 
-    body = {
+        body = {
         "contents": [
             {
                 "parts": [
