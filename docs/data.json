@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-21T07:55:16.904860+00:00",
+  "updated_at": "2026-04-21T11:25:29.495721+00:00",
   "players": [
     {
       "name": "Squirt1e",
@@ -7,7 +7,7 @@
       "url": "https://lol.ps/summoner/Squirt1e%20_2004?region=kr",
       "tier": "Master",
       "lp": 802,
-      "lp_diff": 802,
+      "lp_diff": 0,
       "wins": 104,
       "losses": 83,
       "winrate": 55.6,
@@ -19,7 +19,7 @@
       "url": "https://lol.ps/summoner/%E3%83%9E%E3%83%81%E3%83%A5%20_KR2?region=kr",
       "tier": "Master",
       "lp": 181,
-      "lp_diff": 181,
+      "lp_diff": 0,
       "wins": 46,
       "losses": 34,
       "winrate": 57.5,
@@ -31,7 +31,7 @@
       "url": "https://lol.ps/summoner/leave%20me%20alone%20_2005?region=kr",
       "tier": "Master",
       "lp": 180,
-      "lp_diff": 180,
+      "lp_diff": 0,
       "wins": 47,
       "losses": 36,
       "winrate": 56.6,
