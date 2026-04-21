@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-21T04:23:27.224598+00:00",
+  "updated_at": "2026-04-21T04:43:41.891145+00:00",
   "players": [
     {
       "name": "Squirt1e",
@@ -13,22 +13,22 @@
       "rank": 1
     },
     {
-      "name": "leave me alone",
-      "tag": "2005",
-      "url": "https://lol.ps/summoner/leave%20me%20alone%20_2005?region=kr",
+      "name": "マチュ",
+      "tag": "KR2",
+      "url": "https://lol.ps/summoner/%E3%83%9E%E3%83%81%E3%83%A5%20_KR2?region=kr",
       "tier": "Master",
-      "lp": 180,
+      "lp": 181,
       "wins": 0,
       "losses": 0,
       "winrate": 0.0,
       "rank": 2
     },
     {
-      "name": "マチュ",
-      "tag": "KR2",
-      "url": "https://lol.ps/summoner/%E3%83%9E%E3%83%81%E3%83%A5%20_KR2?region=kr",
-      "tier": "Unranked",
-      "lp": 0,
+      "name": "leave me alone",
+      "tag": "2005",
+      "url": "https://lol.ps/summoner/leave%20me%20alone%20_2005?region=kr",
+      "tier": "Master",
+      "lp": 180,
       "wins": 0,
       "losses": 0,
       "winrate": 0.0,
