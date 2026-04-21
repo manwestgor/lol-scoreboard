@@ -82,7 +82,7 @@ def parse_with_gemini(image_bytes: bytes, player_name: str) -> dict:
                 result = json.loads(resp.read())
             break
         except Exception as e:
-            if "429" in str(e) and attempt < 2:
+            if ("429" in str(e) or "503" in str(e)) and attempt < 2:
                 wait = 30 * (attempt + 1)
                 print(f"  429 rate limit, waiting {wait}s before retry...")
                 time.sleep(wait)
