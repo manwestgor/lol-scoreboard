@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-20T19:48:45.593506+00:00",
+  "updated_at": "2026-04-21T04:06:35.762888+00:00",
   "players": [
     {
       "name": "マチュ",
@@ -10,7 +10,7 @@
       "wins": 0,
       "losses": 0,
       "winrate": 0.0,
-      "error": "HTTP Error 404: Not Found",
+      "error": "HTTP Error 429: Too Many Requests",
       "rank": 1
     },
     {
@@ -22,7 +22,7 @@
       "wins": 0,
       "losses": 0,
       "winrate": 0.0,
-      "error": "HTTP Error 404: Not Found",
+      "error": "HTTP Error 429: Too Many Requests",
       "rank": 2
     },
     {
@@ -34,7 +34,7 @@
       "wins": 0,
       "losses": 0,
       "winrate": 0.0,
-      "error": "HTTP Error 404: Not Found",
+      "error": "HTTP Error 429: Too Many Requests",
       "rank": 3
     }
   ]
