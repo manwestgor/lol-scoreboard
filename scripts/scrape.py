@@ -135,6 +135,7 @@ def main():
         try:
             img = screenshot_page(player["url"])
             print(f"  Screenshot captured ({len(img)} bytes)")
+            with open(f"docs/debug_{player['name']}.png", "wb") as f: f.write(img)
 
             rank = parse_with_gemini(img, player["name"])
             print(f"  Parsed: {rank}")
