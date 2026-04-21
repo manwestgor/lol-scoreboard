@@ -14,7 +14,7 @@ PLAYERS = [
 ]
 
 GEMINI_API_KEY = os.environ["GEMINI_API_KEY"]
-GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={GEMINI_API_KEY}"
+GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={GEMINI_API_KEY}"
 # ──────────────────────────────────────────────────────
 
 
@@ -112,7 +112,7 @@ def parse_with_gemini(image_bytes: bytes, player_name: str) -> dict:
             if "429" in str(e) and attempt < 2:
                 wait = 30 * (attempt + 1)
                 print(f"  429 rate limit, waiting {wait}s before retry...")
-                time.sleep(wait)
+                time.sleep(30)
             else:
                 raise
 
