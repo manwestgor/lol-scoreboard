@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-21T06:28:17.127043+00:00",
+  "updated_at": "2026-04-21T06:51:49.983475+00:00",
   "players": [
     {
       "name": "Squirt1e",
@@ -16,8 +16,8 @@
       "name": "マチュ",
       "tag": "KR2",
       "url": "https://lol.ps/summoner/%E3%83%9E%E3%83%81%E3%83%A5%20_KR2?region=kr",
-      "tier": "Unranked",
-      "lp": 0,
+      "tier": "Master",
+      "lp": 181,
       "wins": 0,
       "losses": 0,
       "winrate": 0.0,
