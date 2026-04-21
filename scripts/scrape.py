@@ -169,7 +169,7 @@ def main():
                 "error": str(e),
             })
 
-        time.sleep(15)  # polite delay between requests
+        time.sleep(30)  # polite delay between requests
 
     # Sort by LP descending (Unranked/Error go last)
     TIER_ORDER = {
