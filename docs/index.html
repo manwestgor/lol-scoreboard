@@ -461,8 +461,8 @@ function renderCards(players) {
       ?`<img class="mascot" src="${assets.mascot}" alt="">`
       :"";
 
-    const emblemHtml=emblemSrc
-      ?`<img class="tier-emblem" src="${emblemSrc}" alt="${p.tier}">`
+    const emblemSrc=TIER_EMBLEM[p.tier]||"";
+      const emblemHtml=emblemSrc?`<img class="tier-emblem" src="${emblemSrc}" alt="${p.tier}"><span class="tier-text tier-${p.tier}">${p.tier}</span>`:`<span class="tier-text tier-${p.tier}">${p.tier}</span>`;
       :"";
 
     const streamBtns=streams.map(s=>`
