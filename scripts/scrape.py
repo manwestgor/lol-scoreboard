@@ -2,6 +2,7 @@ import os
 import json
 import base64
 import urllib.request
+import urllib.error
 import time
 from datetime import datetime, timezone
 
@@ -21,19 +22,32 @@ TIER_ORDER = {
     "Unranked": -1, "Error": -2,
 }
 
+# Wait between players (seconds) - longer to avoid 429
+PLAYER_WAIT = 60
+
+# Gemini retry: wait 60s, 120s, 180s
+RETRY_WAITS = [60, 120, 180]
+
 
 def screenshot_page(url: str) -> bytes:
     from playwright.sync_api import sync_playwright
     with sync_playwright() as p:
         browser = p.chromium.launch(
             headless=True,
-            args=["--no-sandbox", "--disable-setuid-sandbox", "--disable-blink-features=AutomationControlled"],
+            args=["--no-sandbox", "--disable-setuid-sandbox",
+                  "--disable-blink-features=AutomationControlled"],
         )
         context = browser.new_context(
-            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            user_agent=(
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/120.0.0.0 Safari/537.36"
+            ),
             viewport={"width": 1280, "height": 900},
         )
-        context.add_init_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+        context.add_init_script(
+            "Object.defineProperty(navigator,'webdriver',{get:()=>undefined})"
+        )
         page = context.new_page()
         try:
             page.goto(url, wait_until="networkidle", timeout=45000)
@@ -56,28 +70,26 @@ def parse_with_gemini(image_bytes: bytes, player_name: str) -> dict:
         "Find the ranked solo/duo queue statistics on this page.\n"
         "Wins and losses may appear as: '47W 36L', '47Win 36Loss', or numbers next to W/L labels.\n"
         "Return ONLY a valid JSON object, no markdown, no explanation.\n"
-        "Example: {\"tier\": \"Master\", \"lp\": 180, \"wins\": 47, \"losses\": 36}\n"
+        'Example: {"tier": "Master", "lp": 180, "wins": 47, "losses": 36}\n'
         "- tier: Iron/Bronze/Silver/Gold/Platinum/Emerald/Diamond/Master/Grandmaster/Challenger\n"
         "- lp: integer\n"
         "- wins: integer\n"
         "- losses: integer\n"
-        "If not found: {\"tier\": \"Unranked\", \"lp\": 0, \"wins\": 0, \"losses\": 0}"
+        'If not found: {"tier": "Unranked", "lp": 0, "wins": 0, "losses": 0}'
     )
 
     body = {
-        "contents": [
-            {
-                "parts": [
-                    {"text": prompt},
-                    {"inline_data": {"mime_type": "image/png", "data": image_b64}},
-                ]
-            }
-        ]
+        "contents": [{
+            "parts": [
+                {"text": prompt},
+                {"inline_data": {"mime_type": "image/png", "data": image_b64}},
+            ]
+        }]
     }
 
     data = json.dumps(body).encode("utf-8")
 
-    for attempt in range(3):
+    for attempt, wait in enumerate(RETRY_WAITS):
         try:
             req = urllib.request.Request(
                 GEMINI_URL,
@@ -85,13 +97,19 @@ def parse_with_gemini(image_bytes: bytes, player_name: str) -> dict:
                 headers={"Content-Type": "application/json"},
                 method="POST",
             )
-            with urllib.request.urlopen(req, timeout=30) as resp:
+            with urllib.request.urlopen(req, timeout=60) as resp:
                 result = json.loads(resp.read())
-            break
+            break  # success
+        except urllib.error.HTTPError as e:
+            code = e.code
+            if code in (429, 503) and attempt < len(RETRY_WAITS) - 1:
+                print(f"  HTTP {code}, waiting {wait}s before retry {attempt+2}/{len(RETRY_WAITS)}...")
+                time.sleep(wait)
+            else:
+                raise
         except Exception as e:
-            if ("429" in str(e) or "503" in str(e)) and attempt < 2:
-                wait = 30 * (attempt + 1)
-                print(f"  rate limit/error, waiting {wait}s before retry...")
+            if attempt < len(RETRY_WAITS) - 1:
+                print(f"  Error: {e}, waiting {wait}s before retry...")
                 time.sleep(wait)
             else:
                 raise
@@ -128,8 +146,14 @@ def main():
 
     players_data = []
 
-    for player in PLAYERS:
+    for idx, player in enumerate(PLAYERS):
         print(f"Processing {player['name']}...")
+
+        # Wait between players (skip before first)
+        if idx > 0:
+            print(f"  Waiting {PLAYER_WAIT}s before next player...")
+            time.sleep(PLAYER_WAIT)
+
         try:
             img = screenshot_page(player["url"])
             print(f"  Screenshot captured ({len(img)} bytes)")
@@ -143,7 +167,8 @@ def main():
             winrate = round(wins / total * 100, 1) if total > 0 else 0.0
 
             prev = prev_players.get(player["name"])
-            if prev and prev.get("tier") == rank.get("tier") and prev.get("tier") not in ("Error", "Unranked"):
+            if (prev and prev.get("tier") == rank.get("tier")
+                    and prev.get("tier") not in ("Error", "Unranked")):
                 lp_diff = rank.get("lp", 0) - prev.get("lp", 0)
             else:
                 lp_diff = None
@@ -175,8 +200,6 @@ def main():
                 "error": str(e),
             })
 
-        time.sleep(30)
-
     players_data.sort(
         key=lambda p: (TIER_ORDER.get(p["tier"], -1), p["lp"]),
         reverse=True,
@@ -186,20 +209,17 @@ def main():
         p["rank"] = i + 1
 
     now = datetime.now(timezone.utc).isoformat()
-    output = {
-        "updated_at": now,
-        "players": players_data,
-    }
+    output = {"updated_at": now, "players": players_data}
 
     os.makedirs("docs", exist_ok=True)
     with open("docs/data.json", "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
     print("\ndata.json written successfully.")
 
-    valid = [p for p in players_data if p["tier"] not in ("Error",)]
+    valid = [p for p in players_data if p["tier"] != "Error"]
     if valid:
         history = load_history()
-        history_entry = {
+        history.append({
             "updated_at": now,
             "players": [
                 {
@@ -213,8 +233,7 @@ def main():
                 }
                 for p in players_data
             ],
-        }
-        history.append(history_entry)
+        })
         with open("docs/history.json", "w", encoding="utf-8") as f:
             json.dump(history, f, ensure_ascii=False, indent=2)
         print(f"history.json updated ({len(history)} entries).")
