@@ -449,13 +449,8 @@ function renderCards(players) {
     const streams=STREAMS[p.tag]||[];
     const emblemSrc=TIER_EMBLEM[p.tier]||"";
 
-    const banner=assets.bg
-      ?`<div class="banner">
-          <img class="banner-bg" src="${assets.bg}" alt="">
-          <div class="banner-overlay"></div>
-          ${p.rank===1?'<div class="banner-crown">👑</div>':""}
-        </div>`
-      :"";
+    const crownHtml=p.rank===1?`<div style="text-align:center;padding:12px 0 0;font-size:26px;line-height:1;filter:drop-shadow(0 2px 8px rgba(245,200,66,0.7));">👑</div>`:"";
+    const banner=assets.bg?`${crownHtml}<div class="banner"><img class="banner-bg" src="${assets.bg}" alt=""><div class="banner-overlay"></div></div>`:crownHtml;
 
     const mascotHtml=assets.mascot
       ?`<img class="mascot" src="${assets.mascot}" alt="">`
