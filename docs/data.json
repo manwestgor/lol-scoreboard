@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-22T06:31:51.085645+00:00",
+  "updated_at": "2026-04-22T11:47:15.562492+00:00",
   "players": [
     {
       "name": "Squirt1e",
@@ -7,11 +7,23 @@
       "url": "https://lol.ps/summoner/Squirt1e%20_2004?region=kr",
       "tier": "Master",
       "lp": 802,
-      "lp_diff": null,
+      "lp_diff": 0,
       "wins": 104,
       "losses": 83,
       "winrate": 55.6,
       "rank": 1
+    },
+    {
+      "name": "マチュ",
+      "tag": "KR2",
+      "url": "https://lol.ps/summoner/%E3%83%9E%E3%83%81%E3%83%A5%20_KR2?region=kr",
+      "tier": "Master",
+      "lp": 261,
+      "lp_diff": null,
+      "wins": 49,
+      "losses": 35,
+      "winrate": 58.3,
+      "rank": 2
     },
     {
       "name": "leave me alone",
@@ -23,19 +35,6 @@
       "wins": 47,
       "losses": 37,
       "winrate": 56.0,
-      "rank": 2
-    },
-    {
-      "name": "マチュ",
-      "tag": "KR2",
-      "url": "https://lol.ps/summoner/%E3%83%9E%E3%83%81%E3%83%A5%20_KR2?region=kr",
-      "tier": "Error",
-      "lp": 0,
-      "lp_diff": null,
-      "wins": 0,
-      "losses": 0,
-      "winrate": 0.0,
-      "error": "HTTP Error 429: Too Many Requests",
       "rank": 3
     }
   ]
