@@ -42,9 +42,11 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 .card.rank-1:hover{box-shadow:0 0 0 1px rgba(245,200,66,0.28),0 12px 40px rgba(245,200,66,0.13)}
 .card.rank-2{border-color:rgba(168,184,208,0.2)}
 
-/* Crown above banner */
-.card-crown{text-align:center;padding:10px 0 0;line-height:1}
-.card-crown img{width:90px;height:auto;mix-blend-mode:multiply;filter:drop-shadow(0 2px 10px rgba(245,200,66,0.5))}
+/* Crown floats above card - outside overflow */
+.card-wrapper{position:relative;margin-top:0}
+.card-wrapper.rank-1{margin-top:50px}
+.card-crown{position:absolute;top:-50px;left:50%;transform:translateX(-50%);z-index:10;line-height:1;pointer-events:none}
+.card-crown img{width:90px;height:auto;filter:drop-shadow(0 2px 10px rgba(245,200,66,0.6))}
 
 /* Banner */
 .banner{position:relative;height:120px;overflow:hidden}
@@ -222,26 +224,12 @@ function toggleHist(btn, tag, name) {
   if (open) panel.innerHTML = buildHistTable(name);
 }
 
-// Update header logo to show highest rank among all players
-function updateHeaderLogo(players) {
-  const logo = document.getElementById("header-logo");
-  if (!logo || !players.length) return;
-  for (const tier of TIER_ORDER) {
-    if (players.some(p => p.tier === tier) && RANK_IMG[tier]) {
-      logo.src = RANK_IMG[tier];
-      break;
-    }
-  }
-}
-
 function renderCards(players) {
   const c = document.getElementById("cards");
   if (!players||!players.length) {
     c.innerHTML = `<div style="padding:60px;text-align:center;font-family:'DM Mono',monospace;color:var(--text3);">No data</div>`;
     return;
   }
-
-  updateHeaderLogo(players);
 
   c.innerHTML = players.map((p) => {
     const isErr = p.tier==="Error";
@@ -284,8 +272,9 @@ function renderCards(players) {
       ? `<div class="card-actions">${streamBtns}${lolBtn}</div>`
       : `<div class="card-actions single">${lolBtn}</div>`;
 
-    return `<div class="card rank-${p.rank}">
-      ${crownHtml}
+    return `<div style="position:relative;${p.rank===1?"margin-top:55px":""}">
+      ${p.rank===1?`<div style="position:absolute;top:-52px;left:50%;transform:translateX(-50%);z-index:10;"><img src="crown.png" alt="Crown" style="width:95px;height:auto;filter:drop-shadow(0 2px 12px rgba(245,200,66,0.65));"></div>`:""}
+      <div class="card rank-${p.rank}">
       ${bannerHtml}
       <div class="card-body">
         <div class="rank-name-row">
@@ -322,7 +311,7 @@ function renderCards(players) {
         <div class="hist-panel" id="hp-${p.tag}"></div>
       </div>
       ${actionBar}
-    </div>`;
+    </div></div>`;
   }).join("");
 }
 
