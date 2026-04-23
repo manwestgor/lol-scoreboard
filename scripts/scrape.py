@@ -167,9 +167,23 @@ def main():
             winrate = round(wins / total * 100, 1) if total > 0 else 0.0
 
             prev = prev_players.get(player["name"])
+            prev_wins = prev.get("wins", 0) if prev else 0
+            prev_losses = prev.get("losses", 0) if prev else 0
+            prev_lp_diff = prev.get("lp_diff", None) if prev else None
+
+            # Only calculate new diff when games have been played (W or L changed)
+            games_changed = (wins != prev_wins or losses != prev_losses)
+
             if (prev and prev.get("tier") == rank.get("tier")
-                    and prev.get("tier") not in ("Error", "Unranked")):
+                    and prev.get("tier") not in ("Error", "Unranked")
+                    and games_changed):
+                # Games played since last update - calculate fresh diff
                 lp_diff = rank.get("lp", 0) - prev.get("lp", 0)
+                print(f"  Games changed ({prev_wins}W/{prev_losses}L -> {wins}W/{losses}L), lp_diff={lp_diff}")
+            elif not games_changed and prev_lp_diff is not None:
+                # No games played - keep previous diff
+                lp_diff = prev_lp_diff
+                print(f"  No games played, keeping previous lp_diff={lp_diff}")
             else:
                 lp_diff = None
 
