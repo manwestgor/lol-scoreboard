@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>鬥快上韓服菁英2026</title>
-<link rel="icon" href="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-challenger.png">
+<link rel="icon" href="rank_challenger.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -23,7 +23,7 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 
 /* Header */
 .header{text-align:center;margin-bottom:36px}
-.header-logo{width:80px;height:96px;object-fit:contain;display:block;margin:0 auto 12px;filter:drop-shadow(0 0 16px rgba(245,200,66,0.5))}
+.header-logo{width:160px;height:160px;object-fit:contain;display:block;margin:0 auto 8px;mix-blend-mode:screen;filter:brightness(1.1)}
 .header h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(30px,8vw,52px);letter-spacing:0.05em;color:#fff;line-height:1;margin-bottom:6px;text-shadow:0 0 40px rgba(124,106,255,0.4)}
 .header-sub{font-size:13px;color:var(--text3);font-style:italic;margin-bottom:14px}
 .last-updated{display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:4px 14px}
@@ -43,7 +43,8 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 .card.rank-2{border-color:rgba(168,184,208,0.2)}
 
 /* Crown above banner */
-.card-crown{text-align:center;padding:12px 0 0;font-size:26px;line-height:1;filter:drop-shadow(0 2px 8px rgba(245,200,66,0.7))}
+.card-crown{text-align:center;padding:10px 0 0;line-height:1}
+.card-crown img{width:90px;height:auto;mix-blend-mode:multiply;filter:drop-shadow(0 2px 10px rgba(245,200,66,0.5))}
 
 /* Banner */
 .banner{position:relative;height:120px;overflow:hidden}
@@ -63,9 +64,15 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 /* Stats */
 .stats-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
 .stat-box{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:11px 14px;position:relative;overflow:hidden}
-.mascot{position:absolute;right:-4px;bottom:-4px;width:80px;height:80px;object-fit:cover;object-position:center top;border-radius:8px;opacity:0.85;pointer-events:none}
+
+/* Rank emblem in LP box */
+.rank-emblem-bg{position:absolute;right:-10px;bottom:-10px;width:110px;height:110px;object-fit:contain;opacity:0.85;mix-blend-mode:screen;pointer-events:none}
+
+/* Mascot in Record box */
+.mascot{position:absolute;right:-4px;bottom:-4px;width:90px;height:90px;object-fit:cover;object-position:center top;border-radius:8px;opacity:0.9;pointer-events:none}
+
 .stat-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:5px}
-.lp-row{display:flex;align-items:baseline;gap:5px}
+.lp-row{display:flex;align-items:baseline;gap:5px;position:relative;z-index:1}
 .lp-num{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:0.02em;color:#fff;line-height:1}
 .card.rank-1 .lp-num{color:var(--gold)}
 .lp-unit{font-family:'DM Mono',monospace;font-size:12px;color:var(--text3)}
@@ -73,8 +80,7 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 .lp-diff.pos{color:var(--green)}
 .lp-diff.neg{color:var(--red)}
 .lp-diff.zero{color:var(--text3)}
-.tier-row{display:flex;align-items:center;gap:6px;margin-top:4px}
-.tier-emblem{width:22px;height:22px;object-fit:contain}
+.tier-row{display:flex;align-items:center;gap:5px;margin-top:4px;position:relative;z-index:1}
 .tier-text{font-family:'DM Mono',monospace;font-size:11px}
 .tier-Challenger{color:#00e5ff}
 .tier-Grandmaster{color:#ff6b6b}
@@ -87,10 +93,10 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 .tier-Bronze{color:var(--bronze)}
 .tier-Iron{color:#94a3b8}
 .tier-Unranked,.tier-Error{color:var(--text3)}
-.record-line{font-family:'DM Mono',monospace;font-size:14px;margin-bottom:2px}
+.record-line{font-family:'DM Mono',monospace;font-size:14px;margin-bottom:2px;position:relative;z-index:1}
 .record-line .w{color:var(--green)}
 .record-line .l{color:var(--red)}
-.wr-line{font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)}
+.wr-line{font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);position:relative;z-index:1}
 
 /* History */
 .hist-toggle-row{display:flex;justify-content:center;padding:8px 0 4px}
@@ -133,9 +139,7 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 <body>
 <div class="page">
   <header class="header">
-    <img class="header-logo"
-      src="https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/emblem-challenger.png"
-      alt="Challenger">
+    <img class="header-logo" id="header-logo" src="rank_challenger.png" alt="Challenger">
     <h1>鬥快上韓服菁英2026</h1>
     <div class="header-sub">年年都搞，年年爛尾 XD</div>
     <div class="last-updated" id="last-updated">
@@ -151,21 +155,13 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 </div>
 
 <script>
-const MEDALS = ["👑","🥈","🥉"];
 let historyData = [];
 
-const CDN = "https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/ranked-emblem/";
-const TIER_EMBLEM = {
-  Challenger:  CDN+"emblem-challenger.png",
-  Grandmaster: CDN+"emblem-grandmaster.png",
-  Master:      CDN+"emblem-master.png",
-  Diamond:     CDN+"emblem-diamond.png",
-  Emerald:     CDN+"emblem-emerald.png",
-  Platinum:    CDN+"emblem-platinum.png",
-  Gold:        CDN+"emblem-gold.png",
-  Silver:      CDN+"emblem-silver.png",
-  Bronze:      CDN+"emblem-bronze.png",
-  Iron:        CDN+"emblem-iron.png",
+// Rank emblem images (local files)
+const RANK_IMG = {
+  Challenger:  "rank_challenger.png",
+  Grandmaster: "rank_grandmaster.png",
+  Master:      "rank_master.png",
 };
 
 const PLAYER_ASSETS = {
@@ -184,6 +180,8 @@ const PLATFORM_SVG = {
   twitch:   `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>`,
   bilibili: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.786 1.894v7.52c.017.764.28 1.395.786 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.786-1.893v-7.52c-.017-.765-.28-1.396-.786-1.894-.507-.497-1.134-.755-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c0-.373.129-.689.386-.947.258-.257.574-.386.947-.386zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373z"/></svg>`,
 };
+
+const TIER_ORDER = ["Challenger","Grandmaster","Master","Diamond","Emerald","Platinum","Gold","Silver","Bronze","Iron"];
 
 function fmtDiff(d) {
   if (d===null||d===undefined) return "";
@@ -224,37 +222,52 @@ function toggleHist(btn, tag, name) {
   if (open) panel.innerHTML = buildHistTable(name);
 }
 
+// Update header logo to show highest rank among all players
+function updateHeaderLogo(players) {
+  const logo = document.getElementById("header-logo");
+  if (!logo || !players.length) return;
+  for (const tier of TIER_ORDER) {
+    if (players.some(p => p.tier === tier) && RANK_IMG[tier]) {
+      logo.src = RANK_IMG[tier];
+      break;
+    }
+  }
+}
+
 function renderCards(players) {
   const c = document.getElementById("cards");
   if (!players||!players.length) {
     c.innerHTML = `<div style="padding:60px;text-align:center;font-family:'DM Mono',monospace;color:var(--text3);">No data</div>`;
     return;
   }
-  c.innerHTML = players.map((p, i) => {
+
+  updateHeaderLogo(players);
+
+  c.innerHTML = players.map((p) => {
     const isErr = p.tier==="Error";
     const wrColor = p.winrate>=55?"var(--green)":p.winrate>=50?"var(--text2)":"var(--red)";
     const assets = PLAYER_ASSETS[p.tag]||{};
     const streams = STREAMS[p.tag]||[];
 
-    // Tier emblem
-    const emblemSrc = TIER_EMBLEM[p.tier]||"";
-    const emblemHtml = emblemSrc
-      ? `<img class="tier-emblem" src="${emblemSrc}" alt="${p.tier}"><span class="tier-text tier-${p.tier}">${p.tier}</span>`
-      : `<span class="tier-text tier-${p.tier}">${p.tier}</span>`;
+    // Rank emblem for LP box
+    const rankImgSrc = RANK_IMG[p.tier]||"";
+    const rankEmblemHtml = rankImgSrc
+      ? `<img class="rank-emblem-bg" src="${rankImgSrc}" alt="${p.tier}">`
+      : "";
+
+    // Mascot for Record box
+    const mascotHtml = assets.mascot
+      ? `<img class="mascot" src="${assets.mascot}" alt="">`
+      : "";
 
     // Crown above banner for rank 1
     const crownHtml = p.rank===1
-      ? `<div class="card-crown">👑</div>`
+      ? `<div class="card-crown"><img src="crown.png" alt="Crown"></div>`
       : "";
 
     // Banner
     const bannerHtml = assets.bg
       ? `<div class="banner"><img class="banner-bg" src="${assets.bg}" alt=""><div class="banner-overlay"></div></div>`
-      : "";
-
-    // Mascot
-    const mascotHtml = assets.mascot
-      ? `<img class="mascot" src="${assets.mascot}" alt="">`
       : "";
 
     // Stream buttons
@@ -287,8 +300,10 @@ function renderCards(players) {
               <span class="lp-unit">LP</span>
               ${!isErr?fmtDiff(p.lp_diff):""}
             </div>
-            <div class="tier-row">${emblemHtml}</div>
-            ${mascotHtml}
+            <div class="tier-row">
+              <span class="tier-text tier-${p.tier}">${p.tier}</span>
+            </div>
+            ${rankEmblemHtml}
           </div>
           <div class="stat-box">
             <div class="stat-label">Record</div>
@@ -296,6 +311,7 @@ function renderCards(players) {
               ?`<div class="record-line"><span class="w">${p.wins}W</span> / <span class="l">${p.losses}L</span></div>
                 <div class="wr-line" style="color:${wrColor}">WR ${p.winrate}%</div>`
               :`<div class="record-line" style="color:var(--text3)">—</div>`}
+            ${mascotHtml}
           </div>
         </div>
         <div class="hist-toggle-row">
