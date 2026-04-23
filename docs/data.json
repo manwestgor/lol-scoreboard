@@ -1,18 +1,6 @@
 {
-  "updated_at": "2026-04-23T06:36:26.381875+00:00",
+  "updated_at": "2026-04-23T11:54:56.310613+00:00",
   "players": [
-    {
-      "name": "Squirt1e",
-      "tag": "2004",
-      "url": "https://lol.ps/summoner/Squirt1e%20_2004?region=kr",
-      "tier": "Master",
-      "lp": 798,
-      "lp_diff": 0,
-      "wins": 105,
-      "losses": 84,
-      "winrate": 55.6,
-      "rank": 1
-    },
     {
       "name": "マチュ",
       "tag": "KR2",
@@ -23,7 +11,7 @@
       "wins": 49,
       "losses": 37,
       "winrate": 57.0,
-      "rank": 2
+      "rank": 1
     },
     {
       "name": "leave me alone",
@@ -35,6 +23,19 @@
       "wins": 47,
       "losses": 37,
       "winrate": 56.0,
+      "rank": 2
+    },
+    {
+      "name": "Squirt1e",
+      "tag": "2004",
+      "url": "https://lol.ps/summoner/Squirt1e%20_2004?region=kr",
+      "tier": "Error",
+      "lp": 0,
+      "lp_diff": null,
+      "wins": 0,
+      "losses": 0,
+      "winrate": 0.0,
+      "error": "HTTP Error 503: Service Unavailable",
       "rank": 3
     }
   ]
