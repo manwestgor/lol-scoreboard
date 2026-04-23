@@ -131,8 +131,12 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 .action-btn.bilibili-btn:hover{color:#4fc3f7}
 
 /* Per-player comments */
-.player-comments{background:var(--surface);border:1px solid var(--border);border-top:none;border-radius:0 0 16px 16px;padding:16px 20px 20px;margin-top:-1px}
-.player-comments-title{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px}
+.player-comments{background:var(--surface);border:1px solid var(--border);border-top:none;border-radius:0 0 16px 16px;padding:0 20px;margin-top:-1px}
+.comment-toggle-btn{width:100%;background:none;border:none;color:var(--text3);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.06em;cursor:pointer;padding:12px 0;display:flex;align-items:center;justify-content:center;gap:5px;transition:color 0.15s}
+.comment-toggle-btn:hover{color:var(--text2)}
+.comment-toggle-btn .arr{transition:transform 0.2s;display:inline-block}
+.comment-toggle-btn.open .arr{transform:rotate(180deg)}
+.comment-body{padding-bottom:16px}
 .comment-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;max-height:200px;overflow-y:auto}
 .comment-item{background:var(--surface2);border-radius:8px;padding:9px 12px}
 .comment-meta{display:flex;align-items:center;gap:8px;margin-bottom:4px}
@@ -301,8 +305,8 @@ function renderCards(players) {
       ? `<div class="card-actions">${streamBtns}${lolBtn}</div>`
       : `<div class="card-actions single">${lolBtn}</div>`;
 
-    return `<div style="position:relative;${p.rank===1?"margin-top:55px":""}">
-      ${p.rank===1?`<div style="position:absolute;top:-52px;left:50%;transform:translateX(-50%);z-index:10;"><img src="crown.png" alt="Crown" style="width:95px;height:auto;filter:drop-shadow(0 2px 12px rgba(245,200,66,0.65));"></div>`:""}
+    return `<div style="position:relative;${p.rank===1?"margin-top:85px":""}">
+      ${p.rank===1?`<div style="position:absolute;top:-82px;left:50%;transform:translateX(-50%);z-index:10;pointer-events:none;"><img src="crown.png" alt="Crown" style="width:82px;height:auto;filter:drop-shadow(0 2px 12px rgba(245,200,66,0.65));display:block;"></div>`:""}
       <div class="card rank-${p.rank}">
       ${bannerHtml}
       <div class="card-body">
@@ -342,18 +346,20 @@ function renderCards(players) {
       ${actionBar}
     </div>
     <div class="player-comments" id="comments-${p.tag}">
-      <div class="player-comments-title">留言</div>
-      <div class="comment-list" id="clist-${p.tag}">
-        <div class="comment-empty">載入中...</div>
-      </div>
-      <div class="comment-form-inner">
-        <div class="comment-form-row">
-          <input class="comment-input" id="cname-${p.tag}" type="text" placeholder="你的名字" maxlength="20">
+      <button class="comment-toggle-btn" onclick="toggleComments(this,'${p.tag}')">
+        留言 <span class="arr">↓</span>
+      </button>
+      <div class="comment-body" id="cbody-${p.tag}" style="display:none">
+        <div class="comment-list" id="clist-${p.tag}">
+          <div class="comment-empty">載入中...</div>
         </div>
-        <textarea class="comment-textarea" id="ctext-${p.tag}" placeholder="留言..." maxlength="300"></textarea>
-        <div class="comment-form-footer">
-          <span class="submit-msg" id="cmsg-${p.tag}"></span>
-          <button class="submit-btn" onclick="submitComment('${p.tag}')">發送</button>
+        <div class="comment-form-inner">
+          <input class="comment-input" id="cname-${p.tag}" type="text" placeholder="你的名字" maxlength="20">
+          <textarea class="comment-textarea" id="ctext-${p.tag}" placeholder="留言..." maxlength="300"></textarea>
+          <div class="comment-form-footer">
+            <span class="submit-msg" id="cmsg-${p.tag}"></span>
+            <button class="submit-btn" onclick="submitComment('${p.tag}')">發送</button>
+          </div>
         </div>
       </div>
     </div>
@@ -464,10 +470,18 @@ async function submitComment(tag) {
   }
 }
 
-function loadAllComments() {
-  ["2004","KR2","2005"].forEach(tag => loadComments(tag));
+function toggleComments(btn, tag) {
+  const body = document.getElementById("cbody-"+tag);
+  const isOpen = body.style.display === "none";
+  body.style.display = isOpen ? "block" : "none";
+  btn.classList.toggle("open", isOpen);
+  if (isOpen) loadComments(tag);
 }
-// loadAllComments is called inside init() after renderCards
+
+function loadAllComments() {
+  // comments load lazily when user opens the panel
+  // nothing to preload
+}
 </script>
 </body>
 </html>
