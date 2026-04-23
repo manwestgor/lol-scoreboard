@@ -130,6 +130,42 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 .action-btn.twitch-btn:hover{color:#bf94ff}
 .action-btn.bilibili-btn:hover{color:#4fc3f7}
 
+/* Comments section */
+.comments-section{margin-top:40px}
+.comments-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.05em;color:var(--text);margin-bottom:16px}
+.comments-title span{font-size:13px;font-family:'DM Mono',monospace;color:var(--text3);letter-spacing:0.04em;font-weight:400;margin-left:8px}
+
+/* Comment input box */
+.comment-form{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:20px}
+.comment-form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.comment-select,.comment-input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-family:'Inter','Noto Sans TC',sans-serif;font-size:13px;color:var(--text);outline:none;transition:border-color 0.15s}
+.comment-select{cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235a6478' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:30px}
+.comment-select option{background:#1a1040;color:#fff}
+.comment-select:focus,.comment-input:focus{border-color:var(--purple)}
+.comment-textarea{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-family:'Inter','Noto Sans TC',sans-serif;font-size:13px;color:var(--text);outline:none;resize:vertical;min-height:80px;transition:border-color 0.15s;margin-bottom:10px}
+.comment-textarea:focus{border-color:var(--purple)}
+.comment-textarea::placeholder,.comment-input::placeholder{color:var(--text3)}
+.comment-submit{display:flex;align-items:center;justify-content:flex-end}
+.submit-btn{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:#fff;background:var(--purple);border:none;border-radius:8px;padding:8px 20px;cursor:pointer;transition:opacity 0.15s,transform 0.1s;letter-spacing:0.02em}
+.submit-btn:hover{opacity:0.85}
+.submit-btn:active{transform:scale(0.97)}
+.submit-btn:disabled{opacity:0.4;cursor:not-allowed}
+.submit-msg{font-family:'DM Mono',monospace;font-size:11px;margin-right:12px}
+.submit-msg.ok{color:var(--green)}
+.submit-msg.err{color:var(--red)}
+
+/* Comment list */
+.comment-list{display:flex;flex-direction:column;gap:10px}
+.comment-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px}
+.comment-meta{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.comment-player{font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:4px;letter-spacing:0.06em;font-weight:600}
+.comment-player.tag-2004{background:rgba(79,142,247,0.15);color:#4f8ef7}
+.comment-player.tag-KR2{background:rgba(183,148,244,0.15);color:var(--purple)}
+.comment-player.tag-2005{background:rgba(0,161,214,0.15);color:#4fc3f7}
+.comment-time{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3)}
+.comment-text{font-size:13px;color:var(--text2);line-height:1.5;word-break:break-word}
+.comment-empty{text-align:center;padding:32px;font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)}
+
 /* Footer */
 .footer{margin-top:48px;text-align:center;font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:0.05em}
 
@@ -155,6 +191,31 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
   <div class="cards" id="cards">
     <div style="text-align:center;padding:60px;font-family:'DM Mono',monospace;font-size:12px;color:var(--text3);">Loading...</div>
   </div>
+
+  <section class="comments-section">
+    <div class="comments-title">留言板 <span>COMMENTS</span></div>
+
+    <div class="comment-form">
+      <div class="comment-form-row">
+        <select class="comment-select" id="comment-player">
+          <option value="">選擇選手...</option>
+          <option value="2004">Squirt1e #2004</option>
+          <option value="KR2">マチュ #KR2</option>
+          <option value="2005">leave me alone #2005</option>
+        </select>
+        <input class="comment-input" id="comment-name" type="text" placeholder="你的名字（可選）" maxlength="20">
+      </div>
+      <textarea class="comment-textarea" id="comment-text" placeholder="留言..." maxlength="300"></textarea>
+      <div class="comment-submit">
+        <span class="submit-msg" id="submit-msg"></span>
+        <button class="submit-btn" id="submit-btn" onclick="submitComment()">發送留言</button>
+      </div>
+    </div>
+
+    <div class="comment-list" id="comment-list">
+      <div class="comment-empty">載入留言中...</div>
+    </div>
+  </section>
 
   <footer class="footer">Data · lol.ps &nbsp;·&nbsp; Auto-update every 8h</footer>
 </div>
@@ -337,6 +398,109 @@ async function init() {
   }
 }
 init();
+
+// ── Supabase Comments ──────────────────────────────────
+const SUPA_URL = "https://iocsnwfsypoieqyztadl.supabase.co";
+const SUPA_KEY = "sb_publishable_r0ohNN7B1mrxErmhEOtAdQ_ekLxjR_O";
+
+const PLAYER_NAMES = {
+  "2004": "Squirt1e",
+  "KR2":  "マチュ",
+  "2005": "leave me alone",
+};
+
+function fmtCommentDate(iso) {
+  return new Date(iso).toLocaleString("zh-TW", {
+    timeZone: "Asia/Hong_Kong",
+    month: "2-digit", day: "2-digit",
+    hour: "2-digit", minute: "2-digit"
+  });
+}
+
+async function loadComments() {
+  const list = document.getElementById("comment-list");
+  try {
+    const res = await fetch(
+      `${SUPA_URL}/rest/v1/comments?select=*&order=created_at.desc&limit=50`,
+      { headers: { "apikey": SUPA_KEY, "Authorization": `Bearer ${SUPA_KEY}` } }
+    );
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const comments = await res.json();
+
+    if (!comments.length) {
+      list.innerHTML = `<div class="comment-empty">還沒有留言，快來第一個留言！</div>`;
+      return;
+    }
+
+    list.innerHTML = comments.map(c => {
+      const tag = c.player_tag || "";
+      const playerName = PLAYER_NAMES[tag] || tag;
+      const authorName = c.author_name ? `${c.author_name} · ` : "";
+      return `<div class="comment-item">
+        <div class="comment-meta">
+          <span class="comment-player tag-${tag}">${playerName}</span>
+          <span class="comment-time">${authorName}${fmtCommentDate(c.created_at)}</span>
+        </div>
+        <div class="comment-text">${escapeHtml(c.message)}</div>
+      </div>`;
+    }).join("");
+  } catch(e) {
+    list.innerHTML = `<div class="comment-empty" style="color:var(--red);">載入留言失敗：${e.message}</div>`;
+  }
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+            .replace(/"/g,"&quot;").replace(/'/g,"&#039;");
+}
+
+async function submitComment() {
+  const playerTag = document.getElementById("comment-player").value;
+  const authorName = document.getElementById("comment-name").value.trim();
+  const message = document.getElementById("comment-text").value.trim();
+  const btn = document.getElementById("submit-btn");
+  const msgEl = document.getElementById("submit-msg");
+
+  msgEl.textContent = "";
+  msgEl.className = "submit-msg";
+
+  if (!playerTag) { msgEl.textContent = "請選擇選手"; msgEl.className = "submit-msg err"; return; }
+  if (!message)   { msgEl.textContent = "請輸入留言"; msgEl.className = "submit-msg err"; return; }
+
+  btn.disabled = true;
+  btn.textContent = "發送中...";
+
+  try {
+    const body = { player_tag: playerTag, message, author_name: authorName || null };
+    const res = await fetch(`${SUPA_URL}/rest/v1/comments`, {
+      method: "POST",
+      headers: {
+        "apikey": SUPA_KEY,
+        "Authorization": `Bearer ${SUPA_KEY}`,
+        "Content-Type": "application/json",
+        "Prefer": "return=minimal",
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!res.ok) throw new Error("HTTP " + res.status);
+
+    msgEl.textContent = "留言成功！";
+    msgEl.className = "submit-msg ok";
+    document.getElementById("comment-text").value = "";
+    document.getElementById("comment-name").value = "";
+    document.getElementById("comment-player").value = "";
+    await loadComments();
+  } catch(e) {
+    msgEl.textContent = "發送失敗：" + e.message;
+    msgEl.className = "submit-msg err";
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "發送留言";
+  }
+}
+
+loadComments();
 </script>
 </body>
 </html>
