@@ -2,8 +2,9 @@ name: Update Scoreboard
 
 on:
   schedule:
+    # Every 8 hours: 00:00, 08:00, 16:00 UTC
     - cron: "0 0,8,16 * * *"
-  workflow_dispatch:
+  workflow_dispatch: # allow manual trigger from GitHub UI
 
 permissions:
   contents: write
@@ -32,10 +33,10 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python scripts/scrape.py
 
-      - name: Commit and push data.json
+      - name: Commit and push data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/data.json docs/history.json
+          git add docs/data.json docs/history.json docs/history_archive.json
           git diff --staged --quiet || git commit -m "chore: update scoreboard data [$(date -u '+%Y-%m-%d %H:%M UTC')]"
           git push
