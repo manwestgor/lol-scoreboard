@@ -201,18 +201,35 @@ def main():
 
         except Exception as e:
             print(f"  ERROR: {e}")
-            players_data.append({
-                "name": player["name"],
-                "tag": player["tag"],
-                "url": player["url"],
-                "tier": "Error",
-                "lp": 0,
-                "lp_diff": None,
-                "wins": 0,
-                "losses": 0,
-                "winrate": 0.0,
-                "error": str(e),
-            })
+            # Fall back to previous data if available
+            prev = prev_players.get(player["name"])
+            if prev and prev.get("tier") not in ("Error",):
+                print(f"  Using previous data for {player['name']}")
+                players_data.append({
+                    "name": player["name"],
+                    "tag": player["tag"],
+                    "url": player["url"],
+                    "tier": prev.get("tier", "Unranked"),
+                    "lp": prev.get("lp", 0),
+                    "lp_diff": prev.get("lp_diff", None),
+                    "wins": prev.get("wins", 0),
+                    "losses": prev.get("losses", 0),
+                    "winrate": prev.get("winrate", 0.0),
+                    "stale": True,  # mark as carried-over data
+                })
+            else:
+                players_data.append({
+                    "name": player["name"],
+                    "tag": player["tag"],
+                    "url": player["url"],
+                    "tier": "Error",
+                    "lp": 0,
+                    "lp_diff": None,
+                    "wins": 0,
+                    "losses": 0,
+                    "winrate": 0.0,
+                    "error": str(e),
+                })
 
     players_data.sort(
         key=lambda p: (TIER_ORDER.get(p["tier"], -1), p["lp"]),
@@ -231,7 +248,9 @@ def main():
     print("\ndata.json written successfully.")
 
     valid = [p for p in players_data if p["tier"] != "Error"]
-    if valid:
+    # Only write history if at least one player has FRESH data (not carried-over stale data)
+    fresh = [p for p in players_data if not p.get("stale") and p["tier"] != "Error"]
+    if fresh:
         history = load_history()
         history.append({
             "updated_at": now,
@@ -246,13 +265,14 @@ def main():
                     "rank": p["rank"],
                 }
                 for p in players_data
+                if p["tier"] != "Error"
             ],
         })
         with open("docs/history.json", "w", encoding="utf-8") as f:
             json.dump(history, f, ensure_ascii=False, indent=2)
         print(f"history.json updated ({len(history)} entries).")
     else:
-        print("All players errored, skipping history entry.")
+        print("No fresh data, skipping history entry.")
 
     print(json.dumps(output, ensure_ascii=False, indent=2))
 
