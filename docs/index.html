@@ -30,31 +30,36 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 .live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2.5s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.2}}
 
-/* Cards */
+/* Cards - unified wrapper includes comments */
 .cards{display:flex;flex-direction:column;gap:16px}
-.card{border-radius:16px;border:1px solid var(--border);background:var(--surface);backdrop-filter:blur(16px);overflow:hidden;transition:transform 0.2s,box-shadow 0.2s;animation:rise 0.55s cubic-bezier(0.22,1,0.36,1) both}
-.card:nth-child(1){animation-delay:0.06s}
-.card:nth-child(2){animation-delay:0.14s}
-.card:nth-child(3){animation-delay:0.22s}
+.card-outer{border-radius:16px;border:1px solid var(--border);background:var(--surface);backdrop-filter:blur(16px);overflow:hidden;transition:transform 0.2s,box-shadow 0.2s;animation:rise 0.55s cubic-bezier(0.22,1,0.36,1) both}
+.card-outer:nth-child(1){animation-delay:0.06s}
+.card-outer:nth-child(2){animation-delay:0.14s}
+.card-outer:nth-child(3){animation-delay:0.22s}
 @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-.card:hover{transform:translateY(-2px)}
-.card.rank-1{border-color:rgba(245,200,66,0.4);background:linear-gradient(135deg,rgba(245,200,66,0.07),rgba(255,170,0,0.03)),var(--surface);box-shadow:0 0 0 1px rgba(245,200,66,0.12),0 8px 32px rgba(245,200,66,0.08)}
-.card.rank-1:hover{box-shadow:0 0 0 1px rgba(245,200,66,0.28),0 12px 40px rgba(245,200,66,0.13)}
-.card.rank-2{border-color:rgba(168,184,208,0.2)}
+.card-outer:hover{transform:translateY(-2px)}
+.card-outer.rank-1{border-color:rgba(245,200,66,0.4);background:linear-gradient(135deg,rgba(245,200,66,0.07),rgba(255,170,0,0.03)),var(--surface);box-shadow:0 0 0 1px rgba(245,200,66,0.12),0 8px 32px rgba(245,200,66,0.08)}
+.card-outer.rank-1:hover{box-shadow:0 0 0 1px rgba(245,200,66,0.28),0 12px 40px rgba(245,200,66,0.13)}
+.card-outer.rank-2{border-color:rgba(168,184,208,0.2)}
+/* inner card has no border/radius - outer handles everything */
+.card{background:none;border:none;border-radius:0;overflow:visible;box-shadow:none;animation:none;transition:none}
+.card:hover{transform:none;box-shadow:none}
+.card.rank-1,.card.rank-2{border:none;background:none;box-shadow:none}
 
-/* Crown fully above card, not overlapping banner */
+/* Crown fully above card */
 .card-wrapper{position:relative;margin-top:0}
-.card-wrapper.rank-1{margin-top:72px}
-.card-crown{position:absolute;top:-70px;left:50%;transform:translateX(-50%);z-index:10;line-height:1;pointer-events:none}
-.card-crown img{width:80px;height:auto;filter:drop-shadow(0 2px 12px rgba(245,200,66,0.65))}
+.card-wrapper.rank-1{margin-top:85px}
 
-/* Card needs overflow visible so crown shows above it */
-.card{overflow:visible}
+/* Banner */
+.banner{position:relative;height:160px;overflow:hidden}
+.banner-bg{width:100%;height:100%;object-fit:cover;display:block}
+.banner-bg.bg-2004{object-position:center 25%}
+.banner-bg.bg-KR2{object-position:35% top}
+.banner-bg.bg-2005{object-position:60% 20%}
+.banner-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.05) 0%,rgba(13,10,35,0.7) 100%)}
 
-/* Banner clips itself instead */
-.banner{position:relative;height:110px;overflow:hidden;border-radius:15px 15px 0 0}
-.banner-bg{width:100%;height:100%;object-fit:cover;object-position:center center;display:block}
-.banner-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.05) 0%,rgba(13,10,35,0.65) 100%)}
+/* Divider between card and comments */
+.card-comments-divider{height:1px;background:var(--border);margin:0}
 
 /* Card body */
 .card-body{padding:16px 20px 0}
@@ -130,9 +135,9 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 .action-btn.twitch-btn:hover{color:#bf94ff}
 .action-btn.bilibili-btn:hover{color:#4fc3f7}
 
-/* Per-player comments */
-.player-comments{background:var(--surface);border:1px solid var(--border);border-top:none;border-radius:0 0 16px 16px;padding:0 20px;margin-top:-1px}
-.comment-toggle-btn{width:100%;background:none;border:none;color:var(--text3);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.06em;cursor:pointer;padding:12px 0;display:flex;align-items:center;justify-content:center;gap:5px;transition:color 0.15s}
+/* Per-player comments - inside card-outer now */
+.comment-divider{height:1px;background:var(--border);margin:4px 0}
+.comment-toggle-btn{width:100%;background:none;border:none;color:var(--text3);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.06em;cursor:pointer;padding:10px 0;display:flex;align-items:center;justify-content:center;gap:5px;transition:color 0.15s}
 .comment-toggle-btn:hover{color:var(--text2)}
 .comment-toggle-btn .arr{transition:transform 0.2s;display:inline-block}
 .comment-toggle-btn.open .arr{transform:rotate(180deg)}
@@ -288,7 +293,7 @@ function renderCards(players) {
 
     // Banner
     const bannerHtml = assets.bg
-      ? `<div class="banner"><img class="banner-bg" src="${assets.bg}" alt=""><div class="banner-overlay"></div></div>`
+      ? `<div class="banner"><img class="banner-bg bg-${p.tag}" src="${assets.bg}" alt=""><div class="banner-overlay"></div></div>`
       : "";
 
     // Stream buttons
@@ -305,64 +310,65 @@ function renderCards(players) {
       ? `<div class="card-actions">${streamBtns}${lolBtn}</div>`
       : `<div class="card-actions single">${lolBtn}</div>`;
 
-    return `<div style="position:relative;${p.rank===1?"margin-top:85px":""}">
-      ${p.rank===1?`<div style="position:absolute;top:-82px;left:50%;transform:translateX(-50%);z-index:10;pointer-events:none;"><img src="crown.png" alt="Crown" style="width:82px;height:auto;filter:drop-shadow(0 2px 12px rgba(245,200,66,0.65));display:block;"></div>`:""}
-      <div class="card rank-${p.rank}">
-      ${bannerHtml}
-      <div class="card-body">
-        <div class="rank-name-row">
-          <span class="rank-label">#${p.rank} —</span>
-          <span class="player-name">${p.name}<span class="player-tag">#${p.tag}</span></span>
-        </div>
-        <div class="stats-row">
-          <div class="stat-box">
-            <div class="stat-label">League Points</div>
-            <div class="lp-row">
-              <span class="lp-num">${isErr?"—":p.lp}</span>
-              <span class="lp-unit">LP</span>
-              ${!isErr?fmtDiff(p.lp_diff):""}
-            </div>
-            <div class="tier-row">
-              <span class="tier-text tier-${p.tier}">${p.tier}</span>
-            </div>
-            ${rankEmblemHtml}
+    return `<div style="position:relative;${p.rank===1?"margin-top:90px":"margin-top:0"}">
+      ${p.rank===1?`<div style="position:absolute;top:-86px;left:50%;transform:translateX(-50%);z-index:10;pointer-events:none;"><img src="crown.png" alt="Crown" style="width:82px;height:auto;filter:drop-shadow(0 2px 12px rgba(245,200,66,0.65));display:block;"></div>`:""}
+      <div class="card-outer rank-${p.rank}">
+        ${bannerHtml}
+        <div class="card-body">
+          <div class="rank-name-row">
+            <span class="rank-label">#${p.rank} —</span>
+            <span class="player-name">${p.name}<span class="player-tag">#${p.tag}</span></span>
           </div>
-          <div class="stat-box">
-            <div class="stat-label">Record</div>
-            ${!isErr
-              ?`<div class="record-line"><span class="w">${p.wins}W</span> / <span class="l">${p.losses}L</span></div>
-                <div class="wr-line" style="color:${wrColor}">WR ${p.winrate}%</div>`
-              :`<div class="record-line" style="color:var(--text3)">—</div>`}
-            ${mascotHtml}
+          <div class="stats-row">
+            <div class="stat-box">
+              <div class="stat-label">League Points</div>
+              <div class="lp-row">
+                <span class="lp-num">${isErr?"—":p.lp}</span>
+                <span class="lp-unit">LP</span>
+                ${!isErr?fmtDiff(p.lp_diff):""}
+              </div>
+              <div class="tier-row">
+                <span class="tier-text tier-${p.tier}">${p.tier}</span>
+              </div>
+              ${rankEmblemHtml}
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Record</div>
+              ${!isErr
+                ?`<div class="record-line"><span class="w">${p.wins}W</span> / <span class="l">${p.losses}L</span></div>
+                  <div class="wr-line" style="color:${wrColor}">WR ${p.winrate}%</div>`
+                :`<div class="record-line" style="color:var(--text3)">—</div>`}
+              ${mascotHtml}
+            </div>
           </div>
+          <div class="hist-toggle-row">
+            <button class="hist-btn" onclick="toggleHist(this,'${p.tag}','${p.name}')">
+              歷史紀錄 <span class="arr">↓</span>
+            </button>
+          </div>
+          <div class="hist-panel" id="hp-${p.tag}"></div>
         </div>
-        <div class="hist-toggle-row">
-          <button class="hist-btn" onclick="toggleHist(this,'${p.tag}','${p.name}')">
-            歷史紀錄 <span class="arr">↓</span>
+        ${actionBar}
+        <div class="comment-divider"></div>
+        <div style="padding:0 20px">
+          <button class="comment-toggle-btn" onclick="toggleComments(this,'${p.tag}')">
+            留言 <span class="arr">↓</span>
           </button>
-        </div>
-        <div class="hist-panel" id="hp-${p.tag}"></div>
-      </div>
-      ${actionBar}
-    </div>
-    <div class="player-comments" id="comments-${p.tag}">
-      <button class="comment-toggle-btn" onclick="toggleComments(this,'${p.tag}')">
-        留言 <span class="arr">↓</span>
-      </button>
-      <div class="comment-body" id="cbody-${p.tag}" style="display:none">
-        <div class="comment-list" id="clist-${p.tag}">
-          <div class="comment-empty">載入中...</div>
-        </div>
-        <div class="comment-form-inner">
-          <input class="comment-input" id="cname-${p.tag}" type="text" placeholder="你的名字" maxlength="20">
-          <textarea class="comment-textarea" id="ctext-${p.tag}" placeholder="留言..." maxlength="300"></textarea>
-          <div class="comment-form-footer">
-            <span class="submit-msg" id="cmsg-${p.tag}"></span>
-            <button class="submit-btn" onclick="submitComment('${p.tag}')">發送</button>
+          <div class="comment-body" id="cbody-${p.tag}" style="display:none">
+            <div class="comment-list" id="clist-${p.tag}">
+              <div class="comment-empty">載入中...</div>
+            </div>
+            <div class="comment-form-inner">
+              <input class="comment-input" id="cname-${p.tag}" type="text" placeholder="你的名字" maxlength="20">
+              <textarea class="comment-textarea" id="ctext-${p.tag}" placeholder="留言..." maxlength="300"></textarea>
+              <div class="comment-form-footer">
+                <span class="submit-msg" id="cmsg-${p.tag}"></span>
+                <button class="submit-btn" onclick="submitComment('${p.tag}')">發送</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </div>`;
   }).join("");
 }
