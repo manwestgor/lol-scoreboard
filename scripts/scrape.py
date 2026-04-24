@@ -252,7 +252,7 @@ def main():
     fresh = [p for p in players_data if not p.get("stale") and p["tier"] != "Error"]
     if fresh:
         history = load_history()
-        history.append({
+        new_entry = {
             "updated_at": now,
             "players": [
                 {
@@ -267,10 +267,45 @@ def main():
                 for p in players_data
                 if p["tier"] != "Error"
             ],
-        })
+        }
+        history.append(new_entry)
+
+        # Split into recent (<=30 days) and old (>30 days)
+        cutoff = datetime.now(timezone.utc).timestamp() - 30 * 24 * 3600
+        recent = []
+        old = []
+        for entry in history:
+            try:
+                ts = datetime.fromisoformat(entry["updated_at"].replace("Z", "+00:00")).timestamp()
+                if ts >= cutoff:
+                    recent.append(entry)
+                else:
+                    old.append(entry)
+            except Exception:
+                recent.append(entry)  # keep if parse fails
+
+        # Write recent to history.json
         with open("docs/history.json", "w", encoding="utf-8") as f:
-            json.dump(history, f, ensure_ascii=False, indent=2)
-        print(f"history.json updated ({len(history)} entries).")
+            json.dump(recent, f, ensure_ascii=False, indent=2)
+        print(f"history.json updated ({len(recent)} entries, last 30 days).")
+
+        # Append old entries to archive
+        if old:
+            try:
+                with open("docs/history_archive.json", "r", encoding="utf-8") as f:
+                    archive = json.load(f)
+            except Exception:
+                archive = []
+
+            # Avoid duplicates by checking updated_at timestamps
+            existing_ts = {e["updated_at"] for e in archive}
+            new_old = [e for e in old if e["updated_at"] not in existing_ts]
+            if new_old:
+                archive.extend(new_old)
+                archive.sort(key=lambda e: e["updated_at"])
+                with open("docs/history_archive.json", "w", encoding="utf-8") as f:
+                    json.dump(archive, f, ensure_ascii=False, indent=2)
+                print(f"history_archive.json updated ({len(archive)} total entries).")
     else:
         print("No fresh data, skipping history entry.")
 
