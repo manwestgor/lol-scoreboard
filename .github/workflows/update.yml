@@ -37,6 +37,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add --ignore-missing docs/data.json docs/history.json docs/history_archive.json
+          touch docs/history_archive.json
+          git add docs/data.json docs/history.json docs/history_archive.json
           git diff --staged --quiet || git commit -m "chore: update scoreboard data [$(date -u '+%Y-%m-%d %H:%M UTC')]"
           git push
