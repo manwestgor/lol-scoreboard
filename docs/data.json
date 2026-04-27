@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-26T18:11:28.176539+00:00",
+  "updated_at": "2026-04-27T08:11:37.099232+00:00",
   "players": [
     {
       "name": "Squirt1e",
@@ -11,6 +11,7 @@
       "wins": 106,
       "losses": 88,
       "winrate": 54.6,
+      "stale": true,
       "rank": 1
     },
     {
@@ -23,6 +24,7 @@
       "wins": 51,
       "losses": 39,
       "winrate": 56.7,
+      "stale": true,
       "rank": 2
     },
     {
