@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-29T13:17:31.561937+00:00",
+  "updated_at": "2026-04-29T20:25:47.417774+00:00",
   "players": [
     {
       "name": "Squirt1e",
@@ -30,11 +30,11 @@
       "tag": "2005",
       "url": "https://lol.ps/summoner/leave%20me%20alone%20_2005?region=kr",
       "tier": "Master",
-      "lp": 180,
-      "lp_diff": 0,
+      "lp": 142,
+      "lp_diff": -38,
       "wins": 47,
-      "losses": 37,
-      "winrate": 56.0,
+      "losses": 39,
+      "winrate": 54.7,
       "rank": 3
     }
   ]
