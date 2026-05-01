@@ -15,7 +15,8 @@ PLAYERS = [
 GEMINI_API_KEY = os.environ["GEMINI_API_KEY"]
 GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={GEMINI_API_KEY}"
 
-TIER_ORDER = {
+SUPA_URL = "https://iocsnwfsypoieqyztadl.supabase.co"
+SUPA_KEY = "sb_publishable_r0ohNN7B1mrxErmhEOtAdQ_ekLxjR_O"
     "Challenger": 9, "Grandmaster": 8, "Master": 7,
     "Diamond": 6, "Emerald": 5, "Platinum": 4,
     "Gold": 3, "Silver": 2, "Bronze": 1, "Iron": 0,
@@ -310,6 +311,27 @@ def main():
         print("No fresh data, skipping history entry.")
 
     print(json.dumps(output, ensure_ascii=False, indent=2))
+
+    # Ping Supabase to prevent auto-pause (free tier pauses after 7 days inactivity)
+    ping_supabase()
+
+
+def ping_supabase():
+    """Do a lightweight read on Supabase to keep the project active."""
+    try:
+        req = urllib.request.Request(
+            f"{SUPA_URL}/rest/v1/comments?limit=1",
+            headers={
+                "apikey": SUPA_KEY,
+                "Authorization": f"Bearer {SUPA_KEY}",
+            },
+            method="GET",
+        )
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            resp.read()
+        print("Supabase ping successful.")
+    except Exception as e:
+        print(f"Supabase ping failed (non-critical): {e}")
 
 
 if __name__ == "__main__":
