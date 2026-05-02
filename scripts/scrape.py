@@ -17,6 +17,8 @@ GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.
 
 SUPA_URL = "https://iocsnwfsypoieqyztadl.supabase.co"
 SUPA_KEY = "sb_publishable_r0ohNN7B1mrxErmhEOtAdQ_ekLxjR_O"
+
+TIER_ORDER = {
     "Challenger": 9, "Grandmaster": 8, "Master": 7,
     "Diamond": 6, "Emerald": 5, "Platinum": 4,
     "Gold": 3, "Silver": 2, "Bronze": 1, "Iron": 0,
