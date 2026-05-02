@@ -363,7 +363,7 @@ function renderCards(players) {
               <textarea class="comment-textarea" id="ctext-${p.tag}" placeholder="留言..." maxlength="300"></textarea>
               <div class="comment-form-footer">
                 <span class="submit-msg" id="cmsg-${p.tag}"></span>
-                <button class="submit-btn" onclick="submitComment('${p.tag}')">發送</button>
+                <button class="submit-btn" id="cbtn-${p.tag}" onclick="submitComment('${p.tag}')">發送</button>
               </div>
             </div>
           </div>
@@ -441,7 +441,7 @@ async function submitComment(tag) {
   const nameEl = document.getElementById("cname-"+tag);
   const textEl = document.getElementById("ctext-"+tag);
   const msgEl  = document.getElementById("cmsg-"+tag);
-  const btn    = document.querySelector(`#comments-${tag} .submit-btn`);
+  const btn    = document.getElementById("cbtn-"+tag);
 
   const author_name = nameEl.value.trim();
   const message     = textEl.value.trim();
