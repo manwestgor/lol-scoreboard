@@ -1,17 +1,16 @@
 {
-  "updated_at": "2026-05-07T10:00:26.143109+00:00",
+  "updated_at": "2026-05-07T20:54:16.310645+00:00",
   "players": [
     {
       "name": "Squirt1e",
       "tag": "2004",
       "url": "https://lol.ps/summoner/Squirt1e%20_2004?region=kr",
       "tier": "Master",
-      "lp": 707,
+      "lp": 685,
       "lp_diff": -22,
       "wins": 106,
-      "losses": 90,
-      "winrate": 54.1,
-      "stale": true,
+      "losses": 91,
+      "winrate": 53.8,
       "rank": 1
     },
     {
@@ -19,12 +18,11 @@
       "tag": "KR2",
       "url": "https://lol.ps/summoner/%E3%83%9E%E3%83%81%E3%83%A5%20_KR2?region=kr",
       "tier": "Master",
-      "lp": 216,
-      "lp_diff": -44,
-      "wins": 64,
-      "losses": 53,
-      "winrate": 54.7,
-      "stale": true,
+      "lp": 213,
+      "lp_diff": -3,
+      "wins": 66,
+      "losses": 55,
+      "winrate": 54.5,
       "rank": 2
     },
     {
@@ -37,7 +35,6 @@
       "wins": 51,
       "losses": 42,
       "winrate": 54.8,
-      "stale": true,
       "rank": 3
     }
   ]
