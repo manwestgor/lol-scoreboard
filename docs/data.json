@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-05-14T09:44:57.412984+00:00",
+  "updated_at": "2026-05-14T21:00:33.911880+00:00",
   "players": [
     {
       "name": "Squirt1e",
@@ -30,11 +30,11 @@
       "tag": "KR2",
       "url": "https://lol.ps/summoner/%E3%83%9E%E3%83%81%E3%83%A5%20_KR2?region=kr",
       "tier": "Master",
-      "lp": 228,
-      "lp_diff": -20,
-      "wins": 74,
+      "lp": 268,
+      "lp_diff": 40,
+      "wins": 76,
       "losses": 62,
-      "winrate": 54.4,
+      "winrate": 55.1,
       "rank": 3
     }
   ]
