@@ -1,69 +1,5 @@
 [
   {
-    "updated_at": "2026-04-22T06:21:24.359698+00:00",
-    "players": [
-      {
-        "name": "マチュ",
-        "tier": "Master",
-        "lp": 261,
-        "wins": 49,
-        "losses": 35,
-        "winrate": 58.3,
-        "rank": 1
-      },
-      {
-        "name": "leave me alone",
-        "tier": "Master",
-        "lp": 180,
-        "wins": 47,
-        "losses": 37,
-        "winrate": 56.0,
-        "rank": 2
-      },
-      {
-        "name": "Squirt1e",
-        "tier": "Error",
-        "lp": 0,
-        "wins": 0,
-        "losses": 0,
-        "winrate": 0.0,
-        "rank": 3
-      }
-    ]
-  },
-  {
-    "updated_at": "2026-04-22T06:31:51.085645+00:00",
-    "players": [
-      {
-        "name": "Squirt1e",
-        "tier": "Master",
-        "lp": 802,
-        "wins": 104,
-        "losses": 83,
-        "winrate": 55.6,
-        "rank": 1
-      },
-      {
-        "name": "leave me alone",
-        "tier": "Master",
-        "lp": 180,
-        "wins": 47,
-        "losses": 37,
-        "winrate": 56.0,
-        "rank": 2
-      },
-      {
-        "name": "マチュ",
-        "tier": "Error",
-        "lp": 0,
-        "wins": 0,
-        "losses": 0,
-        "winrate": 0.0,
-        "rank": 3
-      }
-    ]
-  },
-  {
     "updated_at": "2026-04-22T11:47:15.562492+00:00",
     "players": [
       {
@@ -2401,6 +2337,38 @@
   },
   {
     "updated_at": "2026-05-22T04:01:05.232607+00:00",
+    "players": [
+      {
+        "name": "Squirt1e",
+        "tier": "Master",
+        "lp": 619,
+        "wins": 113,
+        "losses": 102,
+        "winrate": 52.6,
+        "rank": 1
+      },
+      {
+        "name": "マチュ",
+        "tier": "Master",
+        "lp": 308,
+        "wins": 80,
+        "losses": 65,
+        "winrate": 55.2,
+        "rank": 2
+      },
+      {
+        "name": "leave me alone",
+        "tier": "Master",
+        "lp": 285,
+        "wins": 60,
+        "losses": 47,
+        "winrate": 56.1,
+        "rank": 3
+      }
+    ]
+  },
+  {
+    "updated_at": "2026-05-22T10:58:24.175904+00:00",
     "players": [
       {
         "name": "Squirt1e",
