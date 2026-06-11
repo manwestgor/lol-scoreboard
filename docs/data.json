@@ -1,15 +1,15 @@
 {
-  "updated_at": "2026-06-10T18:37:48.564918+00:00",
+  "updated_at": "2026-06-11T04:19:41.953354+00:00",
   "players": [
     {
       "name": "Squirt1e",
       "tag": "2004",
       "url": "https://lol.ps/summoner/Squirt1e%20_2004?region=kr",
       "tier": "Master",
-      "lp": 556,
-      "lp_diff": 18,
-      "wins": 118,
-      "losses": 111,
+      "lp": 552,
+      "lp_diff": -4,
+      "wins": 119,
+      "losses": 112,
       "winrate": 51.5,
       "rank": 1
     },
