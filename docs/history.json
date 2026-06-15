@@ -1,69 +1,5 @@
 [
   {
-    "updated_at": "2026-05-16T07:37:19.322448+00:00",
-    "players": [
-      {
-        "name": "Squirt1e",
-        "tier": "Master",
-        "lp": 608,
-        "wins": 110,
-        "losses": 99,
-        "winrate": 52.6,
-        "rank": 1
-      },
-      {
-        "name": "leave me alone",
-        "tier": "Master",
-        "lp": 283,
-        "wins": 59,
-        "losses": 46,
-        "winrate": 56.2,
-        "rank": 2
-      },
-      {
-        "name": "マチュ",
-        "tier": "Master",
-        "lp": 268,
-        "wins": 76,
-        "losses": 62,
-        "winrate": 55.1,
-        "rank": 3
-      }
-    ]
-  },
-  {
-    "updated_at": "2026-05-16T11:38:46.110149+00:00",
-    "players": [
-      {
-        "name": "Squirt1e",
-        "tier": "Master",
-        "lp": 608,
-        "wins": 110,
-        "losses": 99,
-        "winrate": 52.6,
-        "rank": 1
-      },
-      {
-        "name": "マチュ",
-        "tier": "Master",
-        "lp": 288,
-        "wins": 78,
-        "losses": 63,
-        "winrate": 55.3,
-        "rank": 2
-      },
-      {
-        "name": "leave me alone",
-        "tier": "Master",
-        "lp": 283,
-        "wins": 59,
-        "losses": 46,
-        "winrate": 56.2,
-        "rank": 3
-      }
-    ]
-  },
-  {
     "updated_at": "2026-05-16T19:55:03.789225+00:00",
     "players": [
       {
@@ -2706,6 +2642,38 @@
         "wins": 92,
         "losses": 74,
         "winrate": 55.4,
+        "rank": 2
+      },
+      {
+        "name": "leave me alone",
+        "tier": "Diamond",
+        "lp": 75,
+        "wins": 66,
+        "losses": 58,
+        "winrate": 53.2,
+        "rank": 3
+      }
+    ]
+  },
+  {
+    "updated_at": "2026-06-15T14:03:22.442632+00:00",
+    "players": [
+      {
+        "name": "Squirt1e",
+        "tier": "Master",
+        "lp": 500,
+        "wins": 121,
+        "losses": 116,
+        "winrate": 51.1,
+        "rank": 1
+      },
+      {
+        "name": "マチュ",
+        "tier": "Master",
+        "lp": 309,
+        "wins": 92,
+        "losses": 78,
+        "winrate": 54.1,
         "rank": 2
       },
       {
