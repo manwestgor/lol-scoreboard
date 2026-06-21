@@ -1,18 +1,6 @@
 {
-  "updated_at": "2026-06-21T11:23:42.702953+00:00",
+  "updated_at": "2026-06-21T17:46:08.407413+00:00",
   "players": [
-    {
-      "name": "Squirt1e",
-      "tag": "2004",
-      "url": "https://lol.ps/summoner/Squirt1e%20_2004?region=kr",
-      "tier": "Master",
-      "lp": 425,
-      "lp_diff": -22,
-      "wins": 121,
-      "losses": 116,
-      "winrate": 51.1,
-      "rank": 1
-    },
     {
       "name": "マチュ",
       "tag": "KR2",
@@ -23,6 +11,18 @@
       "wins": 100,
       "losses": 81,
       "winrate": 55.2,
+      "rank": 1
+    },
+    {
+      "name": "Squirt1e",
+      "tag": "2004",
+      "url": "https://lol.ps/summoner/Squirt1e%20_2004?region=kr",
+      "tier": "Master",
+      "lp": 350,
+      "lp_diff": -22,
+      "wins": 121,
+      "losses": 116,
+      "winrate": 51.1,
       "rank": 2
     },
     {
