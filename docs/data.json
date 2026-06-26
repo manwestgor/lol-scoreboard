@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-26T10:59:16.483682+00:00",
+  "updated_at": "2026-06-26T17:56:16.084683+00:00",
   "players": [
     {
       "name": "マチュ",
@@ -17,8 +17,8 @@
       "name": "Squirt1e",
       "tag": "2004",
       "url": "https://lol.ps/summoner/Squirt1e%20_2004?region=kr",
-      "tier": "Master",
-      "lp": 350,
+      "tier": "Diamond",
+      "lp": 75,
       "lp_diff": -22,
       "wins": 121,
       "losses": 116,
