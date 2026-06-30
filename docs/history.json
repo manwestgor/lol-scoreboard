@@ -1,69 +1,5 @@
 [
   {
-    "updated_at": "2026-05-31T04:12:12.670498+00:00",
-    "players": [
-      {
-        "name": "Squirt1e",
-        "tier": "Master",
-        "lp": 568,
-        "wins": 115,
-        "losses": 107,
-        "winrate": 51.8,
-        "rank": 1
-      },
-      {
-        "name": "マチュ",
-        "tier": "Master",
-        "lp": 327,
-        "wins": 81,
-        "losses": 65,
-        "winrate": 55.5,
-        "rank": 2
-      },
-      {
-        "name": "leave me alone",
-        "tier": "Master",
-        "lp": 232,
-        "wins": 65,
-        "losses": 55,
-        "winrate": 54.2,
-        "rank": 3
-      }
-    ]
-  },
-  {
-    "updated_at": "2026-05-31T10:23:36.162702+00:00",
-    "players": [
-      {
-        "name": "Squirt1e",
-        "tier": "Master",
-        "lp": 568,
-        "wins": 115,
-        "losses": 107,
-        "winrate": 51.8,
-        "rank": 1
-      },
-      {
-        "name": "マチュ",
-        "tier": "Master",
-        "lp": 327,
-        "wins": 81,
-        "losses": 65,
-        "winrate": 55.5,
-        "rank": 2
-      },
-      {
-        "name": "leave me alone",
-        "tier": "Master",
-        "lp": 232,
-        "wins": 65,
-        "losses": 55,
-        "winrate": 54.2,
-        "rank": 3
-      }
-    ]
-  },
-  {
     "updated_at": "2026-05-31T17:14:38.451873+00:00",
     "players": [
       {
@@ -2881,6 +2817,38 @@
   },
   {
     "updated_at": "2026-06-30T03:58:47.788667+00:00",
+    "players": [
+      {
+        "name": "マチュ",
+        "tier": "Master",
+        "lp": 355,
+        "wins": 104,
+        "losses": 87,
+        "winrate": 54.5,
+        "rank": 1
+      },
+      {
+        "name": "Squirt1e",
+        "tier": "Diamond",
+        "lp": 92,
+        "wins": 122,
+        "losses": 117,
+        "winrate": 51.0,
+        "rank": 2
+      },
+      {
+        "name": "leave me alone",
+        "tier": "Diamond",
+        "lp": 75,
+        "wins": 66,
+        "losses": 58,
+        "winrate": 53.2,
+        "rank": 3
+      }
+    ]
+  },
+  {
+    "updated_at": "2026-06-30T11:17:36.005210+00:00",
     "players": [
       {
         "name": "マチュ",
