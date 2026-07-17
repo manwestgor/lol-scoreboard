@@ -1,37 +1,5 @@
 [
   {
-    "updated_at": "2026-06-17T12:24:03.320907+00:00",
-    "players": [
-      {
-        "name": "Squirt1e",
-        "tier": "Master",
-        "lp": 500,
-        "wins": 121,
-        "losses": 116,
-        "winrate": 51.1,
-        "rank": 1
-      },
-      {
-        "name": "マチュ",
-        "tier": "Master",
-        "lp": 307,
-        "wins": 94,
-        "losses": 79,
-        "winrate": 54.3,
-        "rank": 2
-      },
-      {
-        "name": "leave me alone",
-        "tier": "Diamond",
-        "lp": 75,
-        "wins": 66,
-        "losses": 58,
-        "winrate": 53.2,
-        "rank": 3
-      }
-    ]
-  },
-  {
     "updated_at": "2026-06-17T18:27:16.198780+00:00",
     "players": [
       {
@@ -2881,6 +2849,38 @@
   },
   {
     "updated_at": "2026-07-17T10:05:08.523628+00:00",
+    "players": [
+      {
+        "name": "マチュ",
+        "tier": "Master",
+        "lp": 411,
+        "wins": 117,
+        "losses": 98,
+        "winrate": 54.4,
+        "rank": 1
+      },
+      {
+        "name": "Squirt1e",
+        "tier": "Diamond",
+        "lp": 92,
+        "wins": 122,
+        "losses": 117,
+        "winrate": 51.0,
+        "rank": 2
+      },
+      {
+        "name": "leave me alone",
+        "tier": "Diamond",
+        "lp": 75,
+        "wins": 66,
+        "losses": 58,
+        "winrate": 53.2,
+        "rank": 3
+      }
+    ]
+  },
+  {
+    "updated_at": "2026-07-17T17:19:59.931784+00:00",
     "players": [
       {
         "name": "マチュ",
