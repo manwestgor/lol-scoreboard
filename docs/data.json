@@ -1,40 +1,40 @@
 {
-  "updated_at": "2026-07-25T09:54:34.026131+00:00",
+  "updated_at": "2026-07-25T17:07:34.966703+00:00",
   "players": [
-    {
-      "name": "Squirt1e",
-      "tag": "2004",
-      "url": "https://lol.ps/summoner/Squirt1e%20_2004?region=kr",
-      "tier": "Silver",
-      "lp": 23,
-      "lp_diff": null,
-      "wins": 112,
-      "losses": 104,
-      "winrate": 51.9,
-      "rank": 1
-    },
     {
       "name": "マチュ",
       "tag": "KR2",
       "url": "https://lol.ps/summoner/%E3%83%9E%E3%83%81%E3%83%A5%20_KR2?region=kr",
-      "tier": "Unranked",
-      "lp": 0,
+      "tier": "Master",
+      "lp": 447,
       "lp_diff": null,
-      "wins": 0,
-      "losses": 0,
-      "winrate": 0.0,
+      "wins": 120,
+      "losses": 99,
+      "winrate": 54.8,
+      "rank": 1
+    },
+    {
+      "name": "Squirt1e",
+      "tag": "2004",
+      "url": "https://lol.ps/summoner/Squirt1e%20_2004?region=kr",
+      "tier": "Diamond",
+      "lp": 75,
+      "lp_diff": null,
+      "wins": 131,
+      "losses": 125,
+      "winrate": 51.2,
       "rank": 2
     },
     {
       "name": "leave me alone",
       "tag": "2005",
       "url": "https://lol.ps/summoner/leave%20me%20alone%20_2005?region=kr",
-      "tier": "Unranked",
-      "lp": 0,
+      "tier": "Diamond",
+      "lp": 75,
       "lp_diff": null,
-      "wins": 0,
-      "losses": 0,
-      "winrate": 0.0,
+      "wins": 66,
+      "losses": 58,
+      "winrate": 53.2,
       "rank": 3
     }
   ]
