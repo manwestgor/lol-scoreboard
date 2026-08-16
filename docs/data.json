@@ -1,16 +1,16 @@
 {
-  "updated_at": "2026-08-16T01:30:13.028221+00:00",
+  "updated_at": "2026-08-16T08:37:01.008809+00:00",
   "players": [
     {
       "name": "マチュ",
       "tag": "KR2",
       "url": "https://lol.ps/summoner/%E3%83%9E%E3%83%81%E3%83%A5%20_KR2?region=kr",
       "tier": "Master",
-      "lp": 509,
-      "lp_diff": 15,
-      "wins": 130,
-      "losses": 106,
-      "winrate": 55.1,
+      "lp": 444,
+      "lp_diff": -65,
+      "wins": 131,
+      "losses": 110,
+      "winrate": 54.4,
       "rank": 1
     },
     {
