@@ -1,29 +1,17 @@
 {
-  "updated_at": "2026-08-16T16:31:53.396867+00:00",
+  "updated_at": "2026-08-17T01:27:58.977923+00:00",
   "players": [
     {
       "name": "マチュ",
       "tag": "KR2",
       "url": "https://lol.ps/summoner/%E3%83%9E%E3%83%81%E3%83%A5%20_KR2?region=kr",
       "tier": "Master",
-      "lp": 442,
-      "lp_diff": -2,
-      "wins": 132,
-      "losses": 111,
-      "winrate": 54.3,
+      "lp": 478,
+      "lp_diff": 36,
+      "wins": 135,
+      "losses": 112,
+      "winrate": 54.7,
       "rank": 1
-    },
-    {
-      "name": "Squirt1e",
-      "tag": "2004",
-      "url": "https://lol.ps/summoner/Squirt1e%20_2004?region=kr",
-      "tier": "Diamond",
-      "lp": 75,
-      "lp_diff": null,
-      "wins": 131,
-      "losses": 125,
-      "winrate": 51.2,
-      "rank": 2
     },
     {
       "name": "leave me alone",
@@ -35,6 +23,18 @@
       "wins": 66,
       "losses": 58,
       "winrate": 53.2,
+      "rank": 2
+    },
+    {
+      "name": "Squirt1e",
+      "tag": "2004",
+      "url": "https://lol.ps/summoner/Squirt1e%20_2004?region=kr",
+      "tier": "Diamond",
+      "lp": 53,
+      "lp_diff": -22,
+      "wins": 131,
+      "losses": 127,
+      "winrate": 50.8,
       "rank": 3
     }
   ]
