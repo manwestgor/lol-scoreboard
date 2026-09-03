@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-02T19:22:25.489667+00:00",
+  "updated_at": "2026-09-03T03:37:41.486305+00:00",
   "players": [
     {
       "name": "マチュ",
@@ -14,6 +14,18 @@
       "rank": 1
     },
     {
+      "name": "leave me alone",
+      "tag": "2005",
+      "url": "https://lol.ps/summoner/leave%20me%20alone%20_2005?region=kr",
+      "tier": "Diamond",
+      "lp": 94,
+      "lp_diff": 89,
+      "wins": 67,
+      "losses": 59,
+      "winrate": 53.2,
+      "rank": 2
+    },
+    {
       "name": "Squirt1e",
       "tag": "2004",
       "url": "https://lol.ps/summoner/Squirt1e%20_2004?region=kr",
@@ -23,18 +35,6 @@
       "wins": 131,
       "losses": 127,
       "winrate": 50.8,
-      "rank": 2
-    },
-    {
-      "name": "leave me alone",
-      "tag": "2005",
-      "url": "https://lol.ps/summoner/leave%20me%20alone%20_2005?region=kr",
-      "tier": "Diamond",
-      "lp": 5,
-      "lp_diff": -70,
-      "wins": 67,
-      "losses": 58,
-      "winrate": 53.6,
       "rank": 3
     }
   ]
