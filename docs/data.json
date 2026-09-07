@@ -1,17 +1,16 @@
 {
-  "updated_at": "2026-09-07T03:51:10.208046+00:00",
+  "updated_at": "2026-09-07T14:09:27.250973+00:00",
   "players": [
     {
       "name": "マチュ",
       "tag": "KR2",
       "url": "https://lol.ps/summoner/%E3%83%9E%E3%83%81%E3%83%A5%20_KR2?region=kr",
       "tier": "Master",
-      "lp": 351,
-      "lp_diff": -4,
-      "wins": 145,
-      "losses": 128,
-      "winrate": 53.1,
-      "stale": true,
+      "lp": 463,
+      "lp_diff": 112,
+      "wins": 151,
+      "losses": 129,
+      "winrate": 53.9,
       "rank": 1
     },
     {
@@ -19,12 +18,11 @@
       "tag": "2005",
       "url": "https://lol.ps/summoner/leave%20me%20alone%20_2005?region=kr",
       "tier": "Diamond",
-      "lp": 93,
-      "lp_diff": 55,
-      "wins": 71,
-      "losses": 60,
-      "winrate": 54.2,
-      "stale": true,
+      "lp": 90,
+      "lp_diff": -3,
+      "wins": 72,
+      "losses": 62,
+      "winrate": 53.7,
       "rank": 2
     },
     {
@@ -32,12 +30,11 @@
       "tag": "2004",
       "url": "https://lol.ps/summoner/Squirt1e%20_2004?region=kr",
       "tier": "Diamond",
-      "lp": 3,
-      "lp_diff": -22,
-      "wins": 131,
+      "lp": 33,
+      "lp_diff": 30,
+      "wins": 132,
       "losses": 127,
-      "winrate": 50.8,
-      "stale": true,
+      "winrate": 51.0,
       "rank": 3
     }
   ]
