@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-09T12:53:35.190826+00:00",
+  "updated_at": "2026-09-09T19:26:59.562083+00:00",
   "players": [
     {
       "name": "マチュ",
@@ -11,6 +11,7 @@
       "wins": 151,
       "losses": 129,
       "winrate": 53.9,
+      "stale": true,
       "rank": 1
     },
     {
@@ -35,6 +36,7 @@
       "wins": 132,
       "losses": 127,
       "winrate": 51.0,
+      "stale": true,
       "rank": 3
     }
   ]
