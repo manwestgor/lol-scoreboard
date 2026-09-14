@@ -1,16 +1,16 @@
 {
-  "updated_at": "2026-09-14T14:55:32.038739+00:00",
+  "updated_at": "2026-09-14T20:16:52.347336+00:00",
   "players": [
     {
       "name": "マチュ",
       "tag": "KR2",
       "url": "https://lol.ps/summoner/%E3%83%9E%E3%83%81%E3%83%A5%20_KR2?region=kr",
       "tier": "Master",
-      "lp": 482,
-      "lp_diff": 19,
-      "wins": 152,
-      "losses": 129,
-      "winrate": 54.1,
+      "lp": 518,
+      "lp_diff": 36,
+      "wins": 154,
+      "losses": 130,
+      "winrate": 54.2,
       "rank": 1
     },
     {
@@ -30,7 +30,7 @@
       "tag": "2004",
       "url": "https://lol.ps/summoner/Squirt1e%20_2004?region=kr",
       "tier": "Diamond",
-      "lp": 33,
+      "lp": 75,
       "lp_diff": 30,
       "wins": 132,
       "losses": 127,
