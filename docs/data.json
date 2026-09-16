@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-16T04:00:21.960152+00:00",
+  "updated_at": "2026-09-16T13:21:56.177737+00:00",
   "players": [
     {
       "name": "マチュ",
@@ -17,12 +17,12 @@
       "name": "leave me alone",
       "tag": "2005",
       "url": "https://lol.ps/summoner/leave%20me%20alone%20_2005?region=kr",
-      "tier": "Diamond",
-      "lp": 86,
-      "lp_diff": -4,
-      "wins": 73,
-      "losses": 64,
-      "winrate": 53.3,
+      "tier": "Master",
+      "lp": 67,
+      "lp_diff": null,
+      "wins": 81,
+      "losses": 72,
+      "winrate": 52.9,
       "rank": 2
     },
     {
