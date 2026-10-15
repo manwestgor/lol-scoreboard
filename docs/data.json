@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-15T03:49:45.873454+00:00",
+  "updated_at": "2026-10-15T13:15:55.500763+00:00",
   "players": [
     {
       "name": "マチュ",
@@ -20,9 +20,9 @@
       "tier": "Master",
       "lp": 67,
       "lp_diff": 0,
-      "wins": 81,
-      "losses": 72,
-      "winrate": 52.9,
+      "wins": 93,
+      "losses": 88,
+      "winrate": 51.4,
       "rank": 2
     },
     {
