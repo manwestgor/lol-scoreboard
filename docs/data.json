@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-28T15:04:00.515241+00:00",
+  "updated_at": "2026-10-28T20:56:12.646135+00:00",
   "players": [
     {
       "name": "マチュ",
@@ -30,11 +30,11 @@
       "tag": "2004",
       "url": "https://lol.ps/summoner/Squirt1e%20_2004?region=kr",
       "tier": "Diamond",
-      "lp": 35,
-      "lp_diff": 30,
-      "wins": 137,
+      "lp": 93,
+      "lp_diff": 58,
+      "wins": 138,
       "losses": 136,
-      "winrate": 50.2,
+      "winrate": 50.4,
       "rank": 3
     }
   ]
