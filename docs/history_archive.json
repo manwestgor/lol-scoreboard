@@ -15902,5 +15902,37 @@
         "rank": 3
       }
     ]
+  },
+  {
+    "updated_at": "2026-10-15T03:49:45.873454+00:00",
+    "players": [
+      {
+        "name": "マチュ",
+        "tier": "Master",
+        "lp": 513,
+        "wins": 165,
+        "losses": 140,
+        "winrate": 54.1,
+        "rank": 1
+      },
+      {
+        "name": "leave me alone",
+        "tier": "Master",
+        "lp": 67,
+        "wins": 81,
+        "losses": 72,
+        "winrate": 52.9,
+        "rank": 2
+      },
+      {
+        "name": "Squirt1e",
+        "tier": "Diamond",
+        "lp": 5,
+        "wins": 136,
+        "losses": 136,
+        "winrate": 50.0,
+        "rank": 3
+      }
+    ]
   }
 ]
